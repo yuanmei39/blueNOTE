@@ -13,4 +13,4 @@ Data files needed for build routine can be downloaded using the following link:
 << LINK >>
 
 Follow the instructions in run.bat. Be sure to unzip the data files into the
-Data directory.
+Data directory. Note that all data sources are provided in the batch file. 
