@@ -21,8 +21,8 @@ https://uwmadison.box.com/s/3pazisdjxc80gu12kdx7hke6tvno7tpz
 
 Be sure to unzip the data files into the Data directory. Note that all data
 sources are provided in the batch file. Included in the data download are both
-pre-processed and processed data files. All code needed for reconciliation (GAMS
-and Stata) are included. The data files downloaded via the above the link do
-not need to be altered and will work as is.
+pre-processed and processed data files. All code needed for reconciliation
+(GAMS and Stata) are included. The downloaded data files do not need to be
+altered and will work as is.
 
 Follow the instructions in run.bat.
