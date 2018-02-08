@@ -4,8 +4,9 @@ National Open source Tools for general Equilibrium analysis
 blueNOTE is a transparent build routine which seeks to provide tools for
 producing subnational economic accounts for input output or computable general
 equilibrium modeling. All code and data necessary for producing subnational
-accounts are provided in this repository. Code for producing state level social
-accounting matrices is currently available.
+accounts are provided in this repository.
+
+Currently, the routine can produce state level accounts.
 
 ## Documentation Coming Soon ##
 
