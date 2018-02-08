@@ -1,6 +1,12 @@
 # blueNOTE
 National Open source Tools for general Equilibrium analysis
 
+blueNOTE is a transparent build routine which seeks to provide tools for
+producing subnational economic accounts for input output or computable general
+equilibrium modeling. All code and data necessary for producing subnational
+accounts are provided in this repository. Code for producing state level social
+accounting matrices is currently available.
+
 ## Documentation Coming Soon ##
 
 However, build routine files are available. These include all GAMS programs and
@@ -10,7 +16,12 @@ defines files for sets and mappings.
 
 Data files needed for build routine can be downloaded using the following link:
 
-<< LINK >>
+https://uwmadison.box.com/s/3pazisdjxc80gu12kdx7hke6tvno7tpz
 
-Follow the instructions in run.bat. Be sure to unzip the data files into the
-Data directory. Note that all data sources are provided in the batch file. 
+Be sure to unzip the data files into the Data directory. Note that all data
+sources are provided in the batch file. Included in the data download are both
+pre-processed and processed data files. All code needed for reconciliation (GAMS
+and Stata) are included. The data files downloaded via the above the link do
+not need to be altered and will work as is.
+
+Follow the instructions in run.bat.
