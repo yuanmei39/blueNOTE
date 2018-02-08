@@ -1,5 +1,5 @@
 # blueNOTE
-National Open source Tools for general Equilibrium analysis
+**N**ational **O**pen source **T**ools for general **E**quilibrium analysis
 
 blueNOTE is a transparent build routine which seeks to provide tools for
 producing subnational economic accounts for input output or computable general
