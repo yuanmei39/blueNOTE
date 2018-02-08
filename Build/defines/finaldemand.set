@@ -1,0 +1,24 @@
+pce                "Personal consumption expenditures"
+
+structures         "Nonresidential private fixed investment in structures"
+equipment          "Nonresidential private fixed investment in equipment"
+intelprop          "Nonresidential private fixed investment in intellectual"
+
+residential        "Residential private fixed investment"
+
+changinv           "Change in private inventories"
+
+defense            "National defense: Consumption expenditures"
+def_structures     "Federal national defense: Gross investment in structures"
+def_equipment      "Federal national defense: Gross investment in equipment"
+def_intelprop      "Federal national defense: Gross investment in intellectual"
+
+nondefense         "Nondefense: Consumption expenditures"
+fed_structures     "Federal nondefense: Gross investment in structures"
+fed_equipment      "Federal nondefense: Gross investment in equipment"
+fed_intelprop      "Federal nondefense: Gross investment in intellectual property p"
+
+state_consume      "State and local government consumption expenditures"
+state_invest       "State and local: Gross investment in structures"
+state_equipment    "State and local: Gross investment in equipment"
+state_intelprop    "State and local: Gross investment in intellectual"
