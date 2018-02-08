@@ -2,7 +2,7 @@
 :	 		  blueNOTE Regionalization Routine
 :
 : Author: Andrew Schreiber, Thomas Rutherford
-: Date:   1/24/2018
+: Date:   2/8/2018
 
 : NOTES:
 
@@ -11,9 +11,6 @@
 : table data from the Census.
 
 : All required sources are provided next to GAMS subroutines.
-
-: calibrate.gms is commented out given I already have the loadpoint files on my
-: machine. If not, be sure to uncomment the routine.
 
 : ------------------------------------------------------------------------------
 
