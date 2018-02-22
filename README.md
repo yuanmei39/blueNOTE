@@ -38,4 +38,6 @@ files are available for users not familiar with Stata.
 
 ## Documentation Coming Soon ##
 
-For the time being, the best overview of the build stream is run.bat.
+For the time being, the best overview of the build stream
+is
+[run.bat](https://github.com/drewschreiber/blueNOTE/blob/master/Build/run.bat).
