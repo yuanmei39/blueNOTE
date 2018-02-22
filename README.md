@@ -23,18 +23,18 @@ state level accounts.
 You can peruse the build routine files in the Build directory. These include
 all GAMS programs and defines files for sets and mappings. You may download the
 full build including the intermediate data files from
-(https://aae.wisc.edu/BlueNOTE/build/build.zip) (88 MB). You can download the
-program files without any data from
-(https://aae.wisc.edu/BlueNOTE/build/code.zip) (188 KB). Source data files can
-be downloaded from:
-
-https://uwmadison.box.com/s/3pazisdjxc80gu12kdx7hke6tvno7tpz
+[here](https://aae.wisc.edu/BlueNOTE/build/build.zip) (88 MB). Source data files can
+be downloaded from
+our
+[Box Repository](https://uwmadison.box.com/s/3pazisdjxc80gu12kdx7hke6tvno7tpz).
 
 Be sure to unzip the data files into the Data directory. Note that all data
 sources are provided in the batch file. Included in the data download are both
 pre-processed and processed data files. All code needed for reconciliation
 (GAMS and Stata) are included. The downloaded data files do not need to be
-altered and will work as is.
+altered and will work as is. While Stata was used to process data files, GAMS
+is the primary language we use to generate the dataset. Post processed GDX
+files are available for users not familiar with Stata.
 
 ## Documentation Coming Soon ##
 
