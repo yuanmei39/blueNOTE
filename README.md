@@ -1,21 +1,32 @@
-# blueNOTE
-**N**ational **O**pen source **T**ools for general **E**quilibrium analysis
+# blueNOTE: **N**ational **O**pen source **T**ools for general **E**quilibrium analysis
 
-blueNOTE is a transparent build routine which seeks to provide tools for
-producing subnational economic accounts for input output or computable general
-equilibrium modeling. All code and data necessary for producing subnational
-accounts are provided in this repository.
+A byproduct of a recently completed research project conducted with Gokce
+Akin-Olcum (from Environmental Defense Fund) and Christoph Bohringer
+(from the University of Oldenburg) is an open-source dataset suitable for
+analysis of energy-economy-environment issues in North America. We begin with
+the national input-output table and downscale to the county level using
+regional economic statistics from the Bureau of Economic Analysis. We also
+employ data from Census Bureaus (foreign trade statistics) and International
+Trade Administration for bilateral trade statistics. Input-output tables will
+further be complemented by physical energy quantities and energy prices from
+the Department of Energys State Energy Data System (SEDS) of EIA.
 
-Currently, the routine can produce state level accounts.
-
-## Documentation Coming Soon ##
-
-However, build routine files are available. These include all GAMS programs and
-defines files for sets and mappings.
+We call the utilities for producing our dataset blueNOTE. blueNOTE is a
+collection of GAMS and Stata program for producing subnational economic
+accounts for input-output or computable general equilibrium models of the
+United States economy. All code and data necessary for producing subnational
+accounts are provided in this repository. Currently, the routine can produce
+state level accounts.
 
 ## Getting Started ##
 
-Data files needed for build routine can be downloaded using the following link:
+You can peruse the build routine files in the Build directory. These include
+all GAMS programs and defines files for sets and mappings. You may download the
+full build including the intermediate data files from
+(https://aae.wisc.edu/BlueNOTE/build/build.zip) (88 MB). You can download the
+program files without any data from
+(https://aae.wisc.edu/BlueNOTE/build/code.zip) (188 KB). Source data files can
+be downloaded from:
 
 https://uwmadison.box.com/s/3pazisdjxc80gu12kdx7hke6tvno7tpz
 
@@ -25,4 +36,6 @@ pre-processed and processed data files. All code needed for reconciliation
 (GAMS and Stata) are included. The downloaded data files do not need to be
 altered and will work as is.
 
-Follow the instructions in run.bat.
+## Documentation Coming Soon ##
+
+For the time being, the best overview of the build stream is run.bat.
