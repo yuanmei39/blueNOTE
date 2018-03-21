@@ -13,7 +13,6 @@ $loaddc rawseds sedsenergy
 
 parameter	prodbtu(r,yr,*)		Total production of either natural gas or crude oil (trillions btu),
 		prodval(r,yr,*)		Value of production using supply prices (billions dollars),
-		ps0(yr,*)		Supply prices of crude oil and natural gas (dollars per million btu),
 		sedsenergy(r,*,*,*,yr)	SEDS energy data;
 
 parameter	crudeprice(*)		Crude Oil price (composite between domestic and international) in dollars per barrel,
@@ -54,8 +53,8 @@ $include 'defines\mapdemsec.map'
 * billions of dollars per year.
 
 parameter	pe0(yr,r,e,demsec)	Energy demand prices ($ per mbtu -- $ per thou kwh for ele),
-		pele0(yr,*,demsec)	Electricity demand prices,
-		pedef(yr,r,e)		Average energy demand prices;
+		pedef(yr,r,e)		Average energy demand prices,
+		ps0(yr,*)			Supply prices of crude oil and natural gas (dollars per million btu);
 
 pedef(yr,r,e)$sum(demsec, sedsenergy(r,"q",e,demsec,yr))
 	 =	sum(demsec, sedsenergy(r,"p",e,demsec,yr)*sedsenergy(r,"q",e,demsec,yr)) /
@@ -77,7 +76,7 @@ pe0(yr,r,'cru',demsec) = cprice(yr,r);
 
 * ps0 denotes the supply price of energy supply sources and is assumed to
 * be the minimum price across regions. Note that industrial electricity
-* Prices are quite a bit lower than other industries in each state.
+* prices are quite a bit lower than other industries in each state.
 
 ps0(yr,e)$(not sameas(e,'cru')) = smin((demsec,rr)$pe0(yr,rr,e,demsec),pe0(yr,rr,e,demsec));
 
@@ -170,8 +169,8 @@ x0(yr,r,as) = sum(mapog(as,s), shrgas(r,yr,as) * x0_(yr,r,s));
 rx0(yr,r,as) = sum(mapog(as,s), shrgas(r,yr,as) * rx0_(yr,r,s));
 s0(yr,r,as) = sum(mapog(as,s), shrgas(r,yr,as) * s0_(yr,r,s));
 a0(yr,r,as) = sum(mapog(as,s), shrgas(r,yr,as) * a0_(yr,r,s));
-ta0(yr,r,as) = sum(mapog(as,s), shrgas(r,yr,as) * ta0_(yr,r,s));
-tm0(yr,r,as) = sum(mapog(as,s), shrgas(r,yr,as) * tm0_(yr,r,s));
+ta0(yr,r,as) = sum(mapog(as,s), ta0_(yr,r,s));
+tm0(yr,r,as) = sum(mapog(as,s), tm0_(yr,r,s));
 cd0(yr,r,as) = sum(mapog(as,s), shrgas(r,yr,as) * cd0_(yr,r,s));
 yh0(yr,r,as) = sum(mapog(as,s), shrgas(r,yr,as) * yh0_(yr,r,s));
 g0(yr,r,as) = sum(mapog(as,s), shrgas(r,yr,as) * g0_(yr,r,s));
@@ -205,7 +204,7 @@ alias(ds,dg);
 * -------------------------------------------------------------------------
 * Enforce that supply sent to other regions in the county or imported from
 * other states line up with net generation. Also, enforce aggregate
-* production value of electricity is in line with seds for 
+* production value of electricity is in line with seds.
 * -------------------------------------------------------------------------
 
 parameter	netgen(r,yr,*)	Net interstate flows of electricity (10s of bill $),
@@ -291,7 +290,7 @@ elegen("total","total",yr) = sum(src,elegen("total",src,yr));
 parameter	eq0(yr,r,*,*)		Energy demand (btu or mwh),
 		pe0(yr,r,e,demsec)	Demand energy prices,
 		ed0(yr,r,e,demsec)	Energy demand (10s of bill $ value gross margin),
-		emarg0(yr,r,e,*)	Margin demand for energy markups (10s of bill $),
+		emarg0(yr,r,e,*)		Margin demand for energy markups (10s of bill $),
 		ned0(yr,r,*,*)		Net energy demands (10s of bill $ value net of margin);
 
 
@@ -345,6 +344,11 @@ parameter	inpshrs(yr,r,*,demsec,*)	Shares of input demand by sector,
 
 inpshrs(yr,r,ioe,demsec,ds)$(sum(ds.local$mapdems(ds,demsec), id0(yr,r,ioe,ds)) and mapdems(ds,demsec)) = 
 		id0(yr,r,ioe,ds) / sum(ds.local$mapdems(ds,demsec), id0(yr,r,ioe,ds));
+
+* If input shares do not exist, use national average:
+
+inpshrs(yr,r,ioe,demsec,ds)$(sum(ds.local,inpshrs(yr,r,ioe,demsec,ds)) = 0 and mapdems(ds,demsec) and sum((r.local,ds.local)$mapdems(ds,demsec), id0(yr,r,ioe,ds))) =
+    sum(r.local, id0(yr,r,ioe,ds)) / sum((r.local,ds.local)$mapdems(ds,demsec), id0(yr,r,ioe,ds));
 
 inpchk(yr,r,ds,'old') = sum(ioe, id0(yr,r,ioe,ds));
 id0(yr,r,ioe,ds) = sum(demsec, inpshrs(yr,r,ioe,demsec,ds) * sum(mapioe(ioe,e), ed0(yr,r,e,demsec)));

@@ -56,7 +56,4 @@ parameter 	metrogmp(r,yr,gdpcat,i)	Mapped MSA level annual GDP;
 loop((mapseci(sec,i),gdpmap(gdpcat,com)),
 	metrogmp(r,yr,gdpcat,i) = metrogmp_(r,yr,com,sec););
 
-display metrogmp;
-$exit
-
 execute_unload 'gdx\mappedmetrogmp.gdx',metrogmp,yr,r,i,sec,com,gdpcat;

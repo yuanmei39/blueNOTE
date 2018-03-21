@@ -1,5 +1,9 @@
 $title Micro-consistency check without subnational trade flows
 
+* Dataset directory structure:
+
+$if not set dsdir 	$set dsdir datasets\
+
 $if not set year 	$set year 2014
 $if not set sectors	$set sectors eng
 $if not set calibto	$set calibto seds
@@ -13,7 +17,7 @@ set	r	States,
  	m	Margins (trade or transport),
 	gm(s)	Commodities employed in margin supply;
 
-$gdxin 'blueNOTE_%sectors%_%year%%calibto%.gdx'
+$gdxin '%dsdir%blueNOTE_%sectors%_%year%%calibto%.gdx'
 $loaddc r s m
 alias(s,g),(r,rr);
 
@@ -73,7 +77,6 @@ sets	y_(r,s)		Production zero profit indicator,
 	py_(r,g)	Output market indicator,
 	pd_(r,g)	Regional market indicator,
 	pk_(r,s)	Capital market indicator;
-	
 
 y_(r,s) = (sum(g, ys0(r,s,g))>0);
 x_(r,g) = s0(r,g);

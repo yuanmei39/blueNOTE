@@ -1,5 +1,8 @@
 $title Regional Disaggregation of the National IO Tables
 
+* Output data directory is specified here:
+$if not set dsdir 	$set dsdir datasets\
+
 $if not set sectors	$set sectors eng
 $if not set year 	$set year 2014
 
@@ -156,23 +159,23 @@ set	fdcat		Aggregated final demand categories /
 
 	fdmap(fd,fdcat)	Mapping of final demand /
 			pce.C			"Personal consumption expenditures"
-			structures.I		"Nonresidential private fixed investment in structures"
+			structures.I	"Nonresidential private fixed investment in structures"
 			equipment.I		"Nonresidential private fixed investment in equipment"
 			intelprop.I		"Nonresidential private fixed investment in intellectual"
-			residential.I		"Residential private fixed investment"
+			residential.I	"Residential private fixed investment"
 			changinv.I		"Change in private inventories"
 			defense.G		"National defense: Consumption expenditures"
 			def_structures.G	"Federal national defense: Gross investment in structures"
-			def_equipment.G		"Federal national defense: Gross investment in equipment"
-			def_intelprop.G		"Federal national defense: Gross investment in intellectual"
-			nondefense.G		"Nondefense: Consumption expenditures"
-			fed_structures.G 	"Federal nondefense: Gross investment in structures"
-			fed_equipment.G		"Federal nondefense: Gross investment in equipment"
-			fed_intelprop.G		"Federal nondefense: Gross investment in intellectual property p"
-			state_consume.G		"State and local government consumption expenditures"
-			state_invest.G		"State and local: Gross investment in structures"
-			state_equipment.G 	"State and local: Gross investment in equipment"
-			state_intelprop.G 	"State and local: Gross investment in intellectual" /;
+			def_equipment.G	"Federal national defense: Gross investment in equipment"
+			def_intelprop.G	"Federal national defense: Gross investment in intellectual"
+			nondefense.G	"Nondefense: Consumption expenditures"
+			fed_structures.G	"Federal nondefense: Gross investment in structures"
+			fed_equipment.G	"Federal nondefense: Gross investment in equipment"
+			fed_intelprop.G	"Federal nondefense: Gross investment in intellectual property p"
+			state_consume.G	"State and local government consumption expenditures"
+			state_invest.G	"State and local: Gross investment in structures"
+			state_equipment.G "State and local: Gross investment in equipment"
+			state_intelprop.G "State and local: Gross investment in intellectual" /;
 
 parameter	g_0(yr,g)	National government demand,
 		i_0(yr,g)	National investment demand,
@@ -395,7 +398,7 @@ abort$(statemodel.objval>1e-5) "Error in benchmark calibration with regional dat
 * We include _ at the end of each parameter name to indicate all years of data
 * are included.
 
-execute_unload 'blueNOTE_%sectors%.gdx' 
+execute_unload '%dsdir%blueNOTE_%sectors%.gdx' 
 
 * Sets:
 

@@ -16,8 +16,7 @@ $include 'defines\states.set'
 
 parameter	usatrd(r,n,yr,t)	Trade data;
 
-$call 'gdxxrw.exe i=..\Data\USATradeOnline\statetrade.xlsx o=temp\gdx\usatrade.gdx par=usatrd rng=data!A1 rdim=3 cdim=1';
-$gdxin 'temp\gdx\usatrade.gdx'
+$gdxin '..\Data\USATradeOnline\statetrade.gdx'
 $loaddc usatrd
 
 * Data originally in millions of dollars. Scale to 10s of billions:
@@ -60,6 +59,7 @@ usatrdshr(ioyr,r,s,t)$(not notinc(s) and not sum(r.local, usatrd_(ioyr,r,s,t))) 
 parameter	shrchk		Comparison between imports and exports;
 
 shrchk(s,t) = usatrdshr('2014','CA',s,t);
+display shrchk;
 
 * Verify all shares sum to 1:
 

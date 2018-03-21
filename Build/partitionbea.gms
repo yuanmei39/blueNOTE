@@ -21,7 +21,7 @@ $loaddc use supply
 * 	Scale and partition dataset:
 * -------------------------------------------------------------------
 
-* Scale input-output data to be in trillions of dollars:
+* Scale input-output data to be in 10s of billions of dollars.
 
 use(yr,ir_use,jc_use) = use(yr,ir_use,jc_use) * 1e-4;
 supply(yr,ir_supply,jc_supply) = supply(yr,ir_supply,jc_supply) * 1e-4;
@@ -41,20 +41,20 @@ $include 'defines/taxessubsidies.set'
 
 alias (i,j);
 
-parameter	y0(yr,i)	Gross output
-		ys0(yr,j,i)	Sectoral supply
-		fs0(yr,i)	Household supply
-		id0(yr,i,j)	Intermediate demand
-		fd0(yr,i,fd)	Final demand,
-		va0(yr,va,j)	Vaue added,
-		ts0(yr,ts,j)	Taxes and subsidies
-		m0(yr,i)	Imports
-		x0(yr,i)	Exports of goods and services
-		mrg0(yr,i)	Trade margins
-		trn0(yr,i)	Transportation costs
-		duty0(yr,i)	Import duties
-		sbd0(yr,i)	Subsidies on products,
-		tax0(yr,i)	Taxes on products;
+parameter	y0(yr,i)		"Gross output",
+		ys0(yr,j,i)		"Sectoral supply",
+		fs0(yr,i)		"Household supply",
+		id0(yr,i,j)		"Intermediate demand",
+		fd0(yr,i,fd)	"Final demand,",
+		va0(yr,va,j)	"Vaue added,",
+		ts0(yr,ts,j)	"Taxes and subsidies",
+		m0(yr,i)		"Imports",
+		x0(yr,i)		"Exports of goods and services",
+		mrg0(yr,i)		"Trade margins",
+		trn0(yr,i)		"Transportation costs",
+		duty0(yr,i)		"Import duties",
+		sbd0(yr,i)		"Subsidies on products,",
+		tax0(yr,i)		"Taxes on products";
 
 id0(yr,i(ir_use),j(jc_use)) = use(yr,ir_use,jc_use);
 ys0(yr,j(jc_supply),i(ir_supply)) = supply(yr,ir_supply,jc_supply);

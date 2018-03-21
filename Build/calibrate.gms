@@ -161,18 +161,18 @@ equations	lsobj, huberobj, mkt_py, mkt_pa, mkt_pm, prf_y, prf_a, x2def, x3def;
 * 	Least squares objective function:
 * -------------------------------------------------------------------
 
-lsobj..	OBJ =e= 	sum((j,i),  ys0(j,i) * sqr(ys0_(j,i)-ys0(j,i))) +
-			sum((i,j),  id0(i,j) * sqr(id0_(i,j)-id0(i,j))) +
+lsobj..	OBJ =e= 	sum((j,i),  abs(ys0(j,i)) * sqr(ys0_(j,i)-ys0(j,i))) +
+			sum((i,j),  abs(id0(i,j)) * sqr(id0_(i,j)-id0(i,j))) +
 
-			sum((i),    fs0(i) * sqr(fs0_(i)-fs0(i))) +
-			sum((i,m),  ms0(i,m) * sqr(ms0_(i,m)-ms0(i,m))) +
-			sum((i),    y0(i) * sqr(y0_(i)-y0(i))) +
-			sum((i,fd), fd0(i,fd) * sqr(fd0_(i,fd)-fd0(i,fd))) +
-			sum((va,j), va0(va,j) * sqr(va0_(va,j)-va0(va,j))) + 
-			sum((i),    a0(i) * sqr(a0_(i)-a0(i))) +
-			sum((i),    x0(i) * sqr(x0_(i)-x0(i))) +
-			sum((i),    m0(i) * sqr(m0_(i)-m0(i))) +
-			sum((m,i),  md0(m,i) * sqr(md0_(m,i)-md0(m,i))) +
+			sum((i),    abs(fs0(i)) * sqr(fs0_(i)-fs0(i))) +
+			sum((i,m),  abs(ms0(i,m)) * sqr(ms0_(i,m)-ms0(i,m))) +
+			sum((i),    abs(y0(i)) * sqr(y0_(i)-y0(i))) +
+			sum((i,fd), abs(fd0(i,fd)) * sqr(fd0_(i,fd)-fd0(i,fd))) +
+			sum((va,j), abs(va0(va,j)) * sqr(va0_(va,j)-va0(va,j))) + 
+			sum((i),    abs(a0(i)) * sqr(a0_(i)-a0(i))) +
+			sum((i),    abs(x0(i)) * sqr(x0_(i)-x0(i))) +
+			sum((i),    abs(m0(i)) * sqr(m0_(i)-m0(i))) +
+			sum((m,i),  abs(md0(m,i)) * sqr(md0_(m,i)-md0(m,i))) +
 
 			1e6 * (
 			sum((j,i)$(not ys0(j,i)), ys0_(j,i)) +
@@ -201,15 +201,15 @@ huberobj..  OBJ =e= 	sum(nonzero(mat,i,j), abs(v0(mat,i,j)) *
 	                (sqr(X2(mat,i,j)) + 2*thetab*X1(mat,i,j) - 
 			2*gammab*(1-gammab)*log(1-gammab-X3(mat,i,j)))) +
 
-			sum((i),    fs0(i) * sqr(fs0_(i)-fs0(i))) +
-			sum((i,m),  ms0(i,m) * sqr(ms0_(i,m)-ms0(i,m))) +
-			sum((i),    y0(i) * sqr(y0_(i)-y0(i))) +
-			sum((i,fd), fd0(i,fd) * sqr(fd0_(i,fd)-fd0(i,fd))) +
-			sum((va,j), va0(va,j) * sqr(va0_(va,j)-va0(va,j))) + 
-			sum((i),    a0(i) * sqr(a0_(i)-a0(i))) +
-			sum((i),    x0(i) * sqr(x0_(i)-x0(i))) +
-			sum((i),    m0(i) * sqr(m0_(i)-m0(i))) +
-			sum((m,i),  md0(m,i) * sqr(md0_(m,i)-md0(m,i))) +
+			sum((i),    abs(fs0(i)) * sqr(fs0_(i)-fs0(i))) +
+			sum((i,m),  abs(ms0(i,m)) * sqr(ms0_(i,m)-ms0(i,m))) +
+			sum((i),    abs(y0(i)) * sqr(y0_(i)-y0(i))) +
+			sum((i,fd), abs(fd0(i,fd)) * sqr(fd0_(i,fd)-fd0(i,fd))) +
+			sum((va,j), abs(va0(va,j)) * sqr(va0_(va,j)-va0(va,j))) + 
+			sum((i),    abs(a0(i)) * sqr(a0_(i)-a0(i))) +
+			sum((i),    abs(x0(i)) * sqr(x0_(i)-x0(i))) +
+			sum((i),    abs(m0(i)) * sqr(m0_(i)-m0(i))) +
+			sum((m,i),  abs(md0(m,i)) * sqr(md0_(m,i)-md0(m,i))) +
 
 			1e6 * (
 			sum((j,i)$(not ys0(j,i)), ys0_(j,i)) +
@@ -415,7 +415,7 @@ balance_ls.savepoint = 1;);
 $include 'temp/loadpoint/loadpntinc.gms'
 
 if (sameas(bal,"huber"), solve balance_huber using NLP minimizing OBJ;);
-if (sameas(bal,"ls"), solve balance_ls using NLP minimizing OBJ;);
+if (sameas(bal,"ls"), solve balance_ls using QCP minimizing OBJ;);
 
 $include 'temp/loadpoint/loadpntcopy.gms'
 
@@ -441,10 +441,16 @@ solution(bal,'md0',yr,m,i) = md0_.L(m,i);
 report(yr,u,bal)$sum((uu,uuu), bench(u,yr,uu,uuu)) = 100 *
 			(sum((uu,uuu)$bench(u,yr,uu,uuu), solution(bal,u,yr,uu,uuu))/sum((uu,uuu), bench(u,yr,uu,uuu)) - 1);
 
+report(yr,'total',bal)$sum((u,uu,uuu), bench(u,yr,uu,uuu)) = 100 *
+	(sum((u,uu,uuu)$bench(u,yr,uu,uuu), solution(bal,u,yr,uu,uuu))/sum((u,uu,uuu), bench(u,yr,uu,uuu)) - 1);
+
 ););
 
 report(yr,u,'pctdev_method')$sum((uu,uuu),solution('ls',u,yr,uu,uuu)) = 100 * 
 			(sum((uu,uuu)$solution('ls',u,yr,uu,uuu), solution('huber',u,yr,uu,uuu))/sum((uu,uuu), solution('ls',u,yr,uu,uuu)) - 1);
+
+report(yr,'total','pctdev_method')$sum((u,uu,uuu), solution('ls',u,yr,uu,uuu)) = 100 *
+		(sum((u,uu,uuu)$solution('ls',u,yr,uu,uuu), solution('huber',u,yr,uu,uuu))/sum((u,uu,uuu), solution('ls',u,yr,uu,uuu)) - 1);
 
 display report;
 

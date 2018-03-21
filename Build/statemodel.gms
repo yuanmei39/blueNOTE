@@ -1,4 +1,4 @@
-$title Micro-consistency check without subnational trade flows
+$title Micro-consistency check without subnational trade flows :/
 
 $if not set year $set year 2014
 
@@ -98,7 +98,7 @@ $prod:X(r,g)$x_(r,g)  t:4
 	o:PD(r,g)	q:xd0(r,g)
 	i:PY(r,g)	q:s0(r,g)
 
-$prod:A(r,g)$a_(r,g)  s:0 dm:4  d:2
+$prod:A(r,g)$a_(r,g)  s:0 dm:4  d(dm):2
 	o:PA(r,g)	q:a0(r,g)		a:RA(r)	t:ta0(r,g)	p:(1-ta0(r,g))
 	o:PFX		q:rx0(r,g)
 	i:PN(g)		q:nd0(r,g)	d:

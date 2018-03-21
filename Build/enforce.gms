@@ -1,5 +1,9 @@
 $title Matrix balancing routine for enforcing parameter values
 
+* Dataset directory structure:
+
+$if not set dsdir 	$set dsdir datasets\
+
 * Output parameters for a single year:
 
 $if not set year	$set year 2014
@@ -34,7 +38,7 @@ set	yr	Years of IO data,
 	gm(s)	Margin related sectors,
  	m	Margins (trade or transport);
 
-$gdxin 'blueNOTE_%sectors%.gdx'
+$gdxin '%dsdir%blueNOTE_%sectors%.gdx'
 $loaddc yr r s m gm
 alias(s,g),(r,rr);
 
@@ -95,6 +99,33 @@ i0nat(yr,g) = sum(r, i0_(yr,r,g));
 g0nat(yr,g) = sum(r, g0_(yr,r,g));
 cd0nat(yr,g) = sum(r, cd0_(yr,r,g));
 
+parameter	dataconschk	Consistency check on re-calibrated data;
+
+dataconschk(r,s,'ys0','old') = sum(g, ys0_('%year%',r,s,g));
+dataconschk(r,g,'id0','old') = sum(s, id0_('%year%',r,g,s));
+dataconschk(r,s,'va0','old') = ld0_('%year%',r,s) + kd0_('%year%',r,s);
+
+dataconschk(r,g,'i0','old') = i0_('%year%',r,g);
+dataconschk(r,g,'g0','old') = g0_('%year%',r,g);
+dataconschk(r,g,'cd0','old') = cd0_('%year%',r,g);
+dataconschk(r,g,'yh0','old') = yh0_('%year%',r,g);
+dataconschk(r,'total','hhadj','old') = hhadj_('%year%',r);
+dataconschk(r,'total','bop','old') = bopdef0_('%year%',r);
+
+dataconschk(r,g,'s0','old') = s0_('%year%',r,g);
+dataconschk(r,g,'xd0','old') = xd0_('%year%',r,g);
+dataconschk(r,g,'xn0','old') = xn0_('%year%',r,g);
+dataconschk(r,g,'x0','old') = x0_('%year%',r,g);
+dataconschk(r,g,'rx0','old') = rx0_('%year%',r,g);
+dataconschk(r,g,'a0','old') = a0_('%year%',r,g);
+dataconschk(r,g,'nd0','old') = nd0_('%year%',r,g);
+dataconschk(r,g,'dd0','old') = dd0_('%year%',r,g);
+dataconschk(r,g,'m0','old') = m0_('%year%',r,g);
+
+dataconschk(r,g,'md0','old') = sum(m, md0_('%year%',r,m,g));
+dataconschk(r,g,'nm0','old') = sum(m, nm0_('%year%',r,m,g));
+dataconschk(r,g,'dm0','old') = sum(m, dm0_('%year%',r,m,g));
+
 * -------------------------------------------------------------------
 * Impose outside data: SEDS
 * -------------------------------------------------------------------
@@ -119,7 +150,7 @@ $if %calibto% == seds $include seds.gms
 * of the average value across all regions.
 
 parameter	trace	Debug check on calculations,
-		zerotol	Tolerance level / 4 /;
+		zerotol	Tolerance level / 3 /;
 
 * Number of elements in each parameter before filter is applied:
 
@@ -187,6 +218,29 @@ id0(yr,r,dg,ds)$(round(id0(yr,r,dg,ds)/trace(yr,dg,'id0','avg'),zerotol)=0) = 0;
 md0(yr,r,m,dg)$(round(md0(yr,r,m,dg)/trace(yr,dg,'md0','avg'),zerotol)=0) = 0;
 nm0(yr,r,m,dg)$(round(nm0(yr,r,m,dg)/trace(yr,dg,'nm0','avg'),zerotol)=0) = 0;
 dm0(yr,r,m,dg)$(round(dm0(yr,r,m,dg)/trace(yr,dg,'dm0','avg'),zerotol)=0) = 0;
+
+* Also, drop tiny numbers:
+
+ld0(yr,r,ds)$(not round(ld0(yr,r,ds),7)) = 0;
+kd0(yr,r,ds)$(not round(kd0(yr,r,ds),7)) = 0;
+m0(yr,r,dg)$(not round(m0(yr,r,dg),7)) = 0;
+x0(yr,r,dg)$(not round(x0(yr,r,dg),7)) = 0;
+rx0(yr,r,dg)$(not round(rx0(yr,r,dg),7)) = 0;
+s0(yr,r,dg)$(not round(s0(yr,r,dg),7)) = 0;
+a0(yr,r,dg)$(not round(a0(yr,r,dg),7)) = 0;
+cd0(yr,r,dg)$(not round(cd0(yr,r,dg),7)) = 0;
+yh0(yr,r,dg)$(not round(yh0(yr,r,dg),7)) = 0;
+g0(yr,r,dg)$(not round(g0(yr,r,dg),7)) = 0;
+i0(yr,r,dg)$(not round(i0(yr,r,dg),7)) = 0;
+xn0(yr,r,dg)$(not round(xn0(yr,r,dg),7)) = 0;
+xd0(yr,r,dg)$(not round(xd0(yr,r,dg),7)) = 0;
+dd0(yr,r,dg)$(not round(dd0(yr,r,dg),7)) = 0;
+nd0(yr,r,dg)$(not round(nd0(yr,r,dg),7)) = 0;
+ys0(yr,r,ds,dg)$(not round(ys0(yr,r,ds,dg),7)) = 0;
+id0(yr,r,dg,ds)$(not round(id0(yr,r,dg,ds),7)) = 0;
+md0(yr,r,m,dg)$(not round(md0(yr,r,m,dg),7)) = 0;
+nm0(yr,r,m,dg)$(not round(nm0(yr,r,m,dg),7)) = 0;
+dm0(yr,r,m,dg)$(not round(dm0(yr,r,m,dg),7)) = 0;
 
 trace(yr,ds,'ld0','after') = sum((r)$ld0(yr,r,ds),1);
 trace(yr,ds,'kd0','after') = sum((r)$kd0(yr,r,ds),1);
@@ -267,7 +321,7 @@ set	mat 	Select parameters for huber objective /ys0,id0/;
 set	nonzero(mat,r,*,*)	Nonzeros in the reference data,
 	zeros(mat,r,*,*)	Zeros in the reference data;
 
-parameter	zeropenalty	Penalty for imposing non-zero elements /1e4/;
+parameter	zeropenalty	Penalty for imposing non-zero elements /1e5/;
 
 set	eneg(s)		Energy sectors in national data
 			/ oil_oil, ele_uti, ref_pet, col_min /;
@@ -432,14 +486,10 @@ zp_ms(r,m)..	sum(ds, NM(r,m,ds) + DM(r,m,ds)) =e= sum(dg, MARD(r,m,dg));
 mc_py(r,dg)..	sum(ds, YS(r,ds,dg)) + YH(r,dg) =e= SUP(r,dg);
 mc_pa(r,dg)..	ARM(r,dg) =e= sum(ds, ID(r,dg,ds)) + CD(r,dg) + GD(r,dg) + INV(r,dg);
 mc_pd(r,dg)..	XD(r,dg) =e= sum(m, DM(r,m,dg)) + DD(r,dg);
-mc_pn(dg)..	sum(r, XN(r,dg)) =e= sum(r, ND(r,dg));
-* mc_pfx..	sum(r, BOP(r) + HHAD(r)) + sum((r,dg), XPT(r,dg)) =e= sum((r,dg), IMP(r,dg));
+mc_pn(dg)..	sum(r, XN(r,dg)) =e= sum((r,m), NM(r,m,dg)) + sum(r, ND(r,dg));
 mc_pfx..	sum(r, BOP(r) + hhadjloop(r)) + sum((r,dg), XPT(r,dg)) =e= sum((r,dg), IMP(r,dg));
 
 expdef(r,dg)..	XPT(r,dg) =g= RX(r,dg);
-
-*incbal(r)..	sum(dg, CD(r,dg) + GD(r,dg) + INV(r,dg)) =e=
-*		sum(dg, YH(r,dg)) + BOP(r) + HHAD(r) + sum(ds, LD(r,ds) + KD(r,ds)) + sum(dg, ta(r,dg)*ARM(r,dg) + tm(r,dg)*IMP(r,dg));
 
 incbal(r)..	sum(dg, CD(r,dg) + GD(r,dg) + INV(r,dg)) =e=
 		sum(dg, YH(r,dg)) + BOP(r) + hhadjloop(r) + sum(ds, LD(r,ds) + KD(r,ds)) + sum(dg, ta(r,dg)*ARM(r,dg) + tm(r,dg)*IMP(r,dg));
@@ -519,7 +569,6 @@ ta(r,dg) = ta0(yr,r,dg);
 tm(r,dg) = tm0(yr,r,dg);
 netgenloop(r) = netgen(r,yr,'seds');
 edloop(r,e,demsec) = ed0(yr,r,e,demsec);
-
 nat_ys(s,g) = ys0nat(yr,s,g);
 nat_x(s) = x0nat(yr,s);
 nat_m(s) = m0nat(yr,s);
@@ -566,7 +615,6 @@ CD.L(r,dg) = cd0loop(r,dg);
 INV.L(r,dg) = i0loop(r,dg);
 GD.L(r,dg) = g0loop(r,dg);
 BOP.L(r) = bopdef0loop(r);
-*HHAD.L(r) = hhadjloop(r);
 
 * Impose some zero restrictions:
 
@@ -578,7 +626,7 @@ MARD.FX(r,m,dg)$(md0loop(r,m,dg) = 0) = 0;
 
 XPT.FX(r,'ele_uti')$(x0loop(r,'ele_uti') = 0) = 0;
 IMP.FX(r,'ele_uti')$(m0loop(r,'ele_uti') = 0) = 0;
-XPT.LO(r,'ele_uti')$(x0loop(r,'ele_uti') > 0) = 0.2 * x0loop(r,'ele_uti');
+XPT.LO(r,'ele_uti')$(x0loop(r,'ele_uti') > 0) = 0.2 * x0loop(r,'ele_uti');XD.LO(r,dg)$xd0loop(r,dg) = 0.8 * xd0loop(r,dg);
 IMP.LO(r,'ele_uti')$(m0loop(r,'ele_uti') > 0) = 0.2 * m0loop(r,'ele_uti');
 
 * Fix electricity imports from the national market for Alaska and Hawaii
@@ -596,7 +644,7 @@ MARD.UP(r,m,ioe) = 1.2 * md0loop(r,m,ioe);
 CD.LO(r,ioe) = 0.8 * cd0loop(r,ioe);
 CD.UP(r,ioe) = 1.2 * cd0loop(r,ioe);
 
-ID.LO(r,dg,ds) = 0.2 * id0loop(r,dg,ds);
+ID.LO(r,dg,ds) = 0.5 * id0loop(r,dg,ds);
 ID.UP(r,dg,ds) = inf;
 ID.LO(r,ioe,dg) = 0.8 * id0loop(r,ioe,dg);
 ID.UP(r,ioe,dg) = 1.2 * id0loop(r,ioe,dg);
@@ -631,7 +679,6 @@ cd0(yr,r,dg) = CD.L(r,dg);
 i0(yr,r,dg) = INV.L(r,dg);
 g0(yr,r,dg) = GD.L(r,dg);
 bopdef0(yr,r) = BOP.L(r);
-*hhadj(yr,r) = HHAD.L(r);
 
 * Reset variables boundaries:
 
@@ -677,19 +724,75 @@ cd0loop(r,dg) = CD.L(r,dg);
 i0loop(r,dg) = INV.L(r,dg);
 g0loop(r,dg) = GD.L(r,dg);
 bopdef0loop(r) = BOP.L(r);
-*hhadjloop(r) = HHAD.L(r);
 ta(r,dg) = ta0('%year%',r,dg);
 tm(r,dg) = tm0('%year%',r,dg);
 c0loop(r) = sum(dg, cd0loop(r,dg));
 
 * -------------------------------------------------------------------
+* Write a report on the differences in the dataset relative to
+* the core blueNOTE output:
+* -------------------------------------------------------------------
+
+* I.e. change in data for energy sectors only, and then an aggregate change in
+* data.
+
+dataconschk(r,ds,'ys0','new') = sum(dg, ys0loop(r,ds,dg));
+dataconschk(r,dg,'id0','new') = sum(ds, id0loop(r,dg,ds));
+dataconschk(r,ds,'va0','new') = ld0loop(r,ds) + kd0loop(r,ds);
+
+dataconschk(r,dg,'i0','new') = i0loop(r,dg);
+dataconschk(r,dg,'g0','new') = g0loop(r,dg);
+dataconschk(r,dg,'cd0','new') = cd0loop(r,dg);
+dataconschk(r,dg,'yh0','new') = yh0loop(r,dg);
+dataconschk(r,'total','hhadj','new') = hhadj_('%year%',r);
+dataconschk(r,'total','bop','new') = bopdef0loop(r);
+
+dataconschk(r,dg,'s0','new') = s0loop(r,dg);
+dataconschk(r,dg,'xd0','new') = xd0loop(r,dg);
+dataconschk(r,dg,'xn0','new') = xn0loop(r,dg);
+dataconschk(r,dg,'x0','new') = x0loop(r,dg);
+dataconschk(r,dg,'rx0','new') = rx0loop(r,dg);
+dataconschk(r,dg,'a0','new') = a0loop(r,dg);
+dataconschk(r,dg,'nd0','new') = nd0loop(r,dg);
+dataconschk(r,dg,'dd0','new') = dd0loop(r,dg);
+dataconschk(r,dg,'m0','new') = m0loop(r,dg);
+
+dataconschk(r,dg,'md0','new') = sum(m, md0loop(r,m,dg));
+dataconschk(r,dg,'nm0','new') = sum(m, nm0loop(r,m,dg));
+dataconschk(r,dg,'dm0','new') = sum(m, dm0loop(r,m,dg));
+
+alias(u,k,*);
+
+set	es(*)	Energy sectors;
+
+es(ioe) = yes;
+es('oil_oil') = yes;
+
+parameter	pctchg	Percent Change in the data;
+
+* All sectors for each parameter:
+pctchg(u,'all')$sum((r,k), dataconschk(r,k,u,'old')) = 100 * (sum((r,k), dataconschk(r,k,u,'new')) / sum((r,k), dataconschk(r,k,u,'old')) - 1);
+
+* All sectors total:
+pctchg('total','all')$sum((r,k,u), dataconschk(r,k,u,'old')) = 100 * (sum((r,k,u), dataconschk(r,k,u,'new')) / sum((r,k,u), dataconschk(r,k,u,'old')) - 1);
+
+* Energy sectors for each parameter:
+pctchg(u,'eng')$sum((r,es), dataconschk(r,es,u,'old')) = 100 * (sum((r,es), dataconschk(r,es,u,'new')) / sum((r,es), dataconschk(r,es,u,'old')) - 1);
+
+* Energy sectors total:
+pctchg('total','eng') = 100 * (sum((r,es,u), dataconschk(r,es,u,'new')) / sum((r,es,u), dataconschk(r,es,u,'old')) - 1);
+
+execute_unload 'temp\enforcechg.gdx' pctchg;
+execute 'gdxxrw.exe i=temp\enforcechg.gdx o=temp\enforcechg.xlsx par=pctchg rng=pctchg!A2 cdim=0'
+
+* -------------------------------------------------------------------
 * Output regionalized dataset calibrated to %calibto%:
 * -------------------------------------------------------------------
 
-execute_unload 'blueNOTE_%sectors%_%year%%calibto%.gdx' 
+execute_unload '%dsdir%blueNOTE_%sectors%_%year%%calibto%.gdx' 
 
 * Sets:
-
+ 
 r,ds=s,m,
 
 * Production data: 

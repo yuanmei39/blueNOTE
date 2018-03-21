@@ -1,3 +1,5 @@
+$stitle Program for reading PCE data
+
 $call 'gdxxrw i=..\Data\PCE\PCE_all.csv o=temp\gdx\PCE_all.gdx par=pce_all rng=a1..aa1441 cdim=1 rdim=8'
 alias (GeoFIPS, ComponentId, ComponentName, Region, IndustryClassification, Description,*)
 set	yr /1997*2015/;
