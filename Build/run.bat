@@ -38,7 +38,7 @@ if not exist "%temp%nul"     mkdir "%temp%"
 if not exist "%temp%gdx\nul" mkdir "%temp%gdx"
 if not exist "%temp%lst\nul" mkdir "%temp%lst"
 if not exist "%dsdir%nul"    mkdir "%dsdir%"
-pause
+
 : ------------------------------------------------------------------------------
 :	 	     Read and Calibrate National Tables
 : ------------------------------------------------------------------------------
@@ -51,13 +51,13 @@ title	Reading National Tables
 gams readbea.gms o="%temp%lst\readbea.lst"
 
 : Shorten string identifiers:
-pause
+
 :mapbea
 title	Mapping national set identifiers
 gams mapbea.gms o="%temp%lst\mapbea.lst"
 
 : Form CGE parameters using raw input data:
-pause
+
 :partbea
 title	Partitioning national matrices into CGE parameters
 gams partitionbea.gms o="%temp%lst\partitionbea.lst"
@@ -67,7 +67,7 @@ gams partitionbea.gms o="%temp%lst\partitionbea.lst"
 :	- agr -> Disaggregates agricultural sectors
 :	- eng -> Disaggregates utilities and energy sectors
 :	- tot -> Total disaggregation with exception to used and other goods. (currently broken)
-pause
+
 :secdisagg
 title	Disaggregating national parameters using 2007 tables
 gams sectordisagg.gms --sectors=%agg% o="%temp%lst\sectordisagg.lst"
@@ -78,7 +78,7 @@ gams sectordisagg.gms --sectors=%agg% o="%temp%lst\sectordisagg.lst"
 :	- huber -> Hybrid huber loss function
 :	- ls    -> Least squares
 :	- ent	-> Entropy (not included)
-pause
+
 :calibbea
 title	Calibrating national tables to accounting model
 gams calibrate.gms --sectors=%agg% --year=2014 --matbal=huber o="%temp%lst\calibrate.lst"
@@ -99,7 +99,7 @@ goto %reg%
 :mapnat
 title	Re-mapping national sectors to fit disaggregation
 gams mapnat.gms --sectors=%agg% o="%temp%lst\mapnat.lst" --year=2014
-pause
+
 : Regionalization is achieved through shares using GSP, CFS, GovExp, and PCE
 : data. The following routines generate a set of consistent shares for use in
 : disagg.gms. For a link to all regional sources:
@@ -113,7 +113,7 @@ pause
 title	Reading GSP data and generting regional shares
 gams readgsp.gms o="%temp%lst\readgsp.lst"
 gams gspshare.gms --sectors=%agg% o="%temp%lst\gspshare.lst"
-pause
+
 : Household expenditures follow the Personal Consumption Expenditure Survey
 : data. Source: (https://www.bea.gov/newsreleases/regional/pce/pce_newsrelease.htm)
 
@@ -121,7 +121,7 @@ pause
 title	Reading PCE data and generting regional shares
 gams readpce.gms o="%temp%lst\readpce.lst"
 gams pceshare.gms --sectors=%agg% o="%temp%lst\pceshare.lst"
-pause
+
 : Government expenditures are assumed to follow the state government finance tables.
 : Source: (https://www.census.gov/programs-surveys/state/data/tables.All.html)
 
@@ -129,7 +129,7 @@ pause
 title	Reading SGF data and generting regional shares
 gams readsgf.gms o="%temp%lst\readsgf.lst"
 gams sgfshare.gms --sectors=%agg% o="%temp%lst\sgfshare.lst"
-pause
+
 : Regional purchase coefficients which determine flows within and out to other
 : states are generated through the 2012 commodity flow survey data. Source:
 : (https://www.census.gov/econ/cfs/).
@@ -138,7 +138,7 @@ pause
 title	Reading CFS data and generating regional purchase coefficients
 gams readcfs.gms o="%temp%lst\readcfs.lst"
 gams cfsshare.gms --sectors=%agg% o="%temp%lst\cfsshare.lst"
-pause
+
 : Shares for exports are generated using Census data from USA Trade Online. The
 : data is free, though an account is required to access the data. 
 : Source: https://usatrade.census.gov/
@@ -147,7 +147,7 @@ pause
 title	Generating shares from USA Trade Online state import/export data
 gams readusatrade.gms o="%temp%lst\readusatrade.gms"
 gams usatradeshare.gms --sectors=%agg% o="%temp%lst\usatradeshr.lst"
-pause
+
 : Disaggregate accounts by region and output a gdx file data for all years. The
 : %year% environment variable determines the test year to verify benchmark
 : consistency.
@@ -155,7 +155,7 @@ pause
 :regdisagg
 title	Performing state level disaggregation
 gams statedisagg.gms --year=2014 --sectors=%agg% o="%temp%lst\statedisagg.lst"
-pause
+
 : OPTIONAL - we can think about enforcing certain identities following the
 : output of the core blueNOTE dataset above. For instance, to pin down totals in
 : energy sectors of the economic data which match SEDS. Note that additional
