@@ -1,40 +1,44 @@
 # blueNOTE: **N**ational **O**pen source **T**ools for general **E**quilibrium analysis
 
 A byproduct of a recently completed research project conducted with
-G&ouml;k&ccedil;e Akin-Ol&ccedil;um (from Environmental Defense Fund) and Christoph
-B&ouml;hringer (from the University of Oldenburg) is an open-source dataset
-suitable for analysis of energy-economy-environment issues in North America. We
-begin with the national input-output table and downscale to the county level
-using regional economic statistics from the Bureau of Economic Analysis. We
-also employ data from Census Bureaus (foreign trade statistics) and
-International Trade Administration for bilateral trade statistics. Input-output
-tables will further be complemented by physical energy quantities and energy
-prices from the Department of Energys State Energy Data System (SEDS) of EIA.
+G&ouml;k&ccedil;e Akin-Ol&ccedil;um (from Environmental Defense Fund) and
+Christoph B&ouml;hringer (from the University of Oldenburg) is an open-source
+dataset suitable for analysis of energy-economy-environment issues in North
+America. We begin with the Bureau of Economic Analysis' [national input-output
+table](https://www.bea.gov/regional/downloadzip.cfm) and downscale to the
+regional level using publicly available economic statistics from governmental
+agencies. We use data from the BEA on regional [gross
+product](https://www.bea.gov/newsreleases/regional/gdp_state/qgsp_newsrelease.htm)
+and data from the [consumer
+expenditures](https://www.bea.gov/newsreleases/regional/pce/pce_newsrelease.htm)
+Census Bureau on [foreign trade](https://usatrade.census.gov), [bilateral
+trade](https://www.census.gov/econ/cfs/) and [state government
+expenditures](https://www.census.gov/programs-surveys/state/data/tables.All.html). Input-output
+tables can further be complemented by physical energy quantities and energy
+prices from the Department of Energy's [State Energy Data System
+(SEDS)](https://www.eia.gov/state/seds/) of EIA.
 
 We call the utilities for producing our dataset blueNOTE. blueNOTE is a
-collection of GAMS programs for producing subnational economic accounts for
-input-output or computable general equilibrium models of the United States
-economy. All code and data necessary for producing subnational accounts are
-provided in this repository. Currently, the routine can produce state level
-accounts.
+collection of [GAMS](https://www.gams.com/) (General Algebraic Modeling System)
+programs for producing subnational economic accounts for input-output or
+computable general equilibrium models of the United States economy. All code
+and data necessary for producing subnational accounts are provided in this
+repository. Currently, the routine can produce state level accounts.
 
 ## Getting Started ##
 
 You can peruse the build routine files in the Build directory. These include
 all GAMS programs and defines files for sets and mappings. You may download the
 full build including the intermediate data files from
-[here](https://aae.wisc.edu/BlueNOTE/build/build.zip) (88 MB). Source data files can
-be downloaded from
-our
-[Box Repository](https://uwmadison.box.com/s/3pazisdjxc80gu12kdx7hke6tvno7tpz).
+[here](https://aae.wisc.edu/BlueNOTE/build/build.zip) (88 MB). Source data
+files can be downloaded from our [Box
+Repository](https://uwmadison.box.com/s/3pazisdjxc80gu12kdx7hke6tvno7tpz).
 
 Be sure to unzip the data files into the Data directory. Note that all data
 sources are provided in the batch file. Included in the data download are both
-pre-processed and processed data files. All code needed for reconciliation
-(GAMS and Stata) are included. The downloaded data files do not need to be
-altered and will work as is. While Stata was used to process data files, GAMS
-is the primary language we use to generate the dataset. Post processed GDX
-files are available for users not familiar with Stata.
+pre-processed and processed data files. All code needed for reconciliation are
+included. The downloaded data files do not need to be altered and will work as
+is.
 
 ## Documentation Coming Soon ##
 
