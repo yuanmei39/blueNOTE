@@ -1,7 +1,7 @@
 # blueNOTE: **N**ational **O**pen source **T**ools for general **E**quilibrium analysis
 
-A byproduct of a recently completed research project conducted with G\"{o}kce
-Akin-Olcum (from Environmental Defense Fund) and Christoph B\"{o}hringer (from
+A byproduct of a recently completed research project conducted with G&ouml;kce
+Akin-Olcum (from Environmental Defense Fund) and Christoph B&ouml;hringer (from
 the University of Oldenburg) is an open-source dataset suitable for analysis of
 energy-economy-environment issues in North America. We begin with the national
 input-output table and downscale to the county level using regional economic
