@@ -46,3 +46,11 @@ is.
 For the time being, the best overview of the build stream
 is
 [run.bat](https://github.com/drewschreiber/blueNOTE/blob/master/Build/run.bat).
+
+## Acknowledgements ##
+
+bluNOTE is written by Andrew Schreiber and Thomas F. Rutherford with
+affiliations to the [Department of Agricultuural and Applied
+Economics](aae.wisc.edu) at the [University of Wisconsin-Madison](wisc.edu) and
+the [Wisconsin Institute for Discovery](wid.wisc.edu). Funding is gratefully
+acknowledged by the [Environmental Defense Fund](edf.org).
