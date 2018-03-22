@@ -50,7 +50,8 @@ is
 ## Acknowledgements ##
 
 bluNOTE is written by Andrew Schreiber and Thomas F. Rutherford with
-affiliations to the [Department of Agricultuural and Applied
-Economics](aae.wisc.edu) at the [University of Wisconsin-Madison](wisc.edu) and
-the [Wisconsin Institute for Discovery](wid.wisc.edu). Funding is gratefully
-acknowledged by the [Environmental Defense Fund](edf.org).
+affiliations to the [Department of Agricultural and Applied
+Economics](https://www.aae.wisc.edu) at the [University of
+Wisconsin-Madison](https://www.wisc.edu) and the [Wisconsin Institute for
+Discovery](https://www.wid.wisc.edu). Funding is gratefully acknowledged by the
+[Environmental Defense Fund](https://www.edf.org).
