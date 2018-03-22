@@ -1,4 +1,6 @@
+<p align="center">
 # blueNOTE: **N**ational **O**pen source **T**ools for general **E**quilibrium analysis
+</p>
 
 A byproduct of a recently completed research project conducted with
 G&ouml;k&ccedil;e Akin-Ol&ccedil;um (from Environmental Defense Fund) and Christoph
