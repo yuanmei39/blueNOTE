@@ -1,15 +1,15 @@
 # blueNOTE: **N**ational **O**pen source **T**ools for general **E**quilibrium analysis
 
-A byproduct of a recently completed research project conducted with G&ouml;kce
-Akin-Olcum (from Environmental Defense Fund) and Christoph B&ouml;hringer (from
-the University of Oldenburg) is an open-source dataset suitable for analysis of
-energy-economy-environment issues in North America. We begin with the national
-input-output table and downscale to the county level using regional economic
-statistics from the Bureau of Economic Analysis. We also employ data from
-Census Bureaus (foreign trade statistics) and International Trade
-Administration for bilateral trade statistics. Input-output tables will further
-be complemented by physical energy quantities and energy prices from the
-Department of Energys State Energy Data System (SEDS) of EIA.
+A byproduct of a recently completed research project conducted with
+G&ouml;k&ccedil;e Akin-Olcum (from Environmental Defense Fund) and Christoph
+B&ouml;hringer (from the University of Oldenburg) is an open-source dataset
+suitable for analysis of energy-economy-environment issues in North America. We
+begin with the national input-output table and downscale to the county level
+using regional economic statistics from the Bureau of Economic Analysis. We
+also employ data from Census Bureaus (foreign trade statistics) and
+International Trade Administration for bilateral trade statistics. Input-output
+tables will further be complemented by physical energy quantities and energy
+prices from the Department of Energys State Energy Data System (SEDS) of EIA.
 
 We call the utilities for producing our dataset blueNOTE. blueNOTE is a
 collection of GAMS and Stata program for producing subnational economic
