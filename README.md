@@ -12,11 +12,11 @@ tables will further be complemented by physical energy quantities and energy
 prices from the Department of Energys State Energy Data System (SEDS) of EIA.
 
 We call the utilities for producing our dataset blueNOTE. blueNOTE is a
-collection of GAMS and Stata program for producing subnational economic
-accounts for input-output or computable general equilibrium models of the
-United States economy. All code and data necessary for producing subnational
-accounts are provided in this repository. Currently, the routine can produce
-state level accounts.
+collection of GAMS programs for producing subnational economic accounts for
+input-output or computable general equilibrium models of the United States
+economy. All code and data necessary for producing subnational accounts are
+provided in this repository. Currently, the routine can produce state level
+accounts.
 
 ## Getting Started ##
 
