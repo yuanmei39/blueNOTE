@@ -44,7 +44,7 @@ if not exist "%dsdir%nul"    mkdir "%dsdir%"
 : ------------------------------------------------------------------------------
 
 : Read in IO summary tables from the BEA website and output basic matrices and
-: set definitions. Source: https://www.bea.gov/regional/downloadzip.cfm
+: set definitions. Source: https://www.bea.gov/industry/io_annual.htm
 
 :readbea
 title	Reading National Tables

@@ -5,7 +5,7 @@ G&ouml;k&ccedil;e Akin-Ol&ccedil;um (from Environmental Defense Fund) and
 Christoph B&ouml;hringer (from the University of Oldenburg) is an open-source
 dataset suitable for analysis of energy-economy-environment issues in North
 America. We begin with the Bureau of Economic Analysis' [national input-output
-table](https://www.bea.gov/regional/downloadzip.cfm) and downscale to the
+table](https://www.bea.gov/industry/io_annual.htm) and downscale to the
 regional level using publicly available economic statistics from governmental
 agencies. We use data from the BEA on regional [gross
 product](https://www.bea.gov/newsreleases/regional/gdp_state/qgsp_newsrelease.htm)
