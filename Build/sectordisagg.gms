@@ -22,9 +22,6 @@ into the routine:
 	tot = all sectors with exception to used and other goods
 	non = no disaggregation
 
-NOTE: The 2007 make table is the TRANSPOSE of the supply tables used in
-the aggregated tables. Yikes. Took me too long to figure out.
-
 $offtext
 
 $if not set sectors	$set sectors eng
@@ -36,9 +33,6 @@ $if %sectors%==non $exit
 * -------------------------------------------------------------------
 * 	Read in data from supply and use tables: (readbea.gms)
 * -------------------------------------------------------------------
-
-* Note: I manually changed the two data files read in here -- swapping
-* numeric row indices with text descriptions.
 
 set 	ir_use		Numeric identifiers for use table rows /
 $include '..\Data\BEA_2007\defines\naics_rowuse.set'
@@ -190,47 +184,26 @@ totaluse(i,"id0+fd0-m0") = sum(j,id0(i,j)) + sum(fd,fd0(i,fd)) + x0(i) - m0(i);
 totaluse(i,"chk") = totaluse(i,"use") - totaluse(i,"id0+fd0-m0");
 display totaluse;
 
-*set	m	Margins /trd,trn/;
-
-*parameter	ms0(i,m)	Margin supply,
-*		md0(m,i)	Margin demand,
-
-* No margin supply and demand in detailed data:
-
 parameter	y0(i)		Aggregate supply,
 		a0(i)		Armington supply,
 		bopdef		Balance of payments deficit;
 
 bopdef = 0;
 y0(j) = sum(i,ys0(i,j));
-*ms0(i,"trd") = max(-mrg0(i),0);
-*ms0(i,"trn") = max(-trn0(i),0);
-*md0("trd",i) = max(mrg0(i),0);
-*md0("trn",i) = max(trn0(i),0);
 
 * Move household supply of recycled goods into the domestic output market
 * from which some may be exported. Net out margin supply from output.
 
 fs0(i) = -min(0, fd0(i,"F01000"));
-
-*s0(i) = sum(j,ys0(j,i)) + fs0(i) - sum(m,ms0(i,m));
 y0(i) = sum(j,ys0(j,i)) + fs0(i);
 
 parameter	details		Check on accounting identities;
 
 details(i,"y0") = y0(i);
-*details(i,"m0") = m0(i) + duty0(i);
 details(i,"m0") = m0(i);
-*details(i,"mrg+trn") = mrg0(i) + trn0(i);
-*details(i,"tax-sbd") = tax0(i)-sbd0(i);
 details(i,"id0") = sum(j, id0(i,j));
 details(i,"fd0") = sum(fd,fd0(i,fd));
 details(i,"x0") = x0(i);
-*details(i,"balance") = y0(i)+m0(i)+duty0(i) + tax0(i)-sbd0(i)
-*	- sum(j, id0(i,j)) - sum(fd,fd0(i,fd)) - x0(i)
-*		+ (mrg0(i) + trn0(i));
-
-* Off balance -- difference possibly due to margins and taxes (less subsidies?).
 
 details(i,"balance") = y0(i) + m0(i) - sum(j, id0(i,j)) - sum(fd,fd0(i,fd)) - x0(i);
 details(i,"marg + tax - sub") = y0(i) + m0(i) - sum(j, id0(i,j)) - sum(fd,fd0(i,fd)) - x0(i);
@@ -250,19 +223,9 @@ $include '..\Data\BEA_2007\defines\goodssectors_agg.set'
 	map(i,aggi)	Sectoring mapping /
 $include '..\Data\BEA_2007\defines\goodssectors.map'
 /,
-*	s		Mapping to non-numeric indices /
-*$include '..\Data\BEA_2007\defines\goodssectors_aggnames.set'
-*/,
-*	mapis(aggi,s)	Mapping to non-numeric indices /
-*$include '..\Data\BEA_2007\defines\goodsnaming.map'
-*/,
 	fd_nm		Non-numeric final demand indices,
 	va_nm		Non-numeric value added indices;
-*	mapn(i,s)	Mapping between disaggregate and aggregate names;
 
-*mapn(i,s) = yes$(sum(mapis(aggi,s), map(i,aggi)));
-
-*alias(s,g),(mapn,mapnn),(aggi,aggj), (mapis,mapjg);
 alias(aggi,aggj);
 
 * -------------------------------------------------------------------
