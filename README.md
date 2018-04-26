@@ -41,10 +41,28 @@ pre-processed and processed data files. All code needed for reconciliation are
 included. The downloaded data files do not need to be altered and will work as
 is.
 
-## Documentation Coming Soon ##
+## Documentation ##
 
-For the time being, the best overview of the build stream
-is
+See our [webpage](https://aae.wisc.edu/BlueNOTE).
+
+The paper for blueNOTE can be
+downloaded [here](https://aae.wisc.edu/BlueNOTE/blueNOTE.pdf).
+
+In this paper, we describe the computer programs used to construct regional
+social accounting matrices and a canonical calibrated static multi-regional,
+multi-sectoral computable general equilibrium (CGE) model which complements the
+constructed set of data. The modeling framework is intended to be used as a
+foundational structure from which an empirical model for policy analysis can be
+based upon. We focus on the development of state level economic data and show
+how to extend the core build stream to incorporate additional energy satellite
+data for formulating an energy based CGE model. The energy based CGE model is
+used to calculate carbon leakage rates given diferent regional configurations
+of state level action in restricting emission levels. In this calculation, we
+explore result sensitivity from including gravity based state level bilateral
+trade flows relative to a model calibrated with a pooled national market.
+
+Another concise overview of the build stream is the launching
+program,
 [run.bat](https://github.com/drewschreiber/blueNOTE/blob/master/Build/run.bat).
 
 ## Acknowledgements ##
