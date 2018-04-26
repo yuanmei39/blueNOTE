@@ -3,21 +3,24 @@
 A byproduct of a recently completed research project conducted with
 G&ouml;k&ccedil;e Akin-Ol&ccedil;um (from Environmental Defense Fund) and
 Christoph B&ouml;hringer (from the University of Oldenburg) is an open-source
-dataset suitable for analysis of energy-economy-environment issues in North
-America. We begin with the Bureau of Economic Analysis' (BEA) [national
-input-output table](https://www.bea.gov/industry/io_annual.htm) and downscale
-to the regional level using publicly available economic statistics from
-governmental agencies. We use additional data from the BEA on regional [gross
-product](https://www.bea.gov/newsreleases/regional/gdp_state/qgsp_newsrelease.htm)
-and [consumer
-expenditures](https://www.bea.gov/newsreleases/regional/pce/pce_newsrelease.htm)
-and data from the Census Bureau on [foreign
-trade](https://usatrade.census.gov), [bilateral
-trade](https://www.census.gov/econ/cfs/) and [state government
-expenditures](https://www.census.gov/programs-surveys/state/data/tables.All.html). Input-output
-tables can further be complemented by physical energy quantities and energy
-prices from the Department of Energy's [State Energy Data System
-(SEDS)](https://www.eia.gov/state/seds/) of EIA.
+dataset suitable for analyzing economy-wide issues in North America. We begin
+with the Bureau of Economic Analysis'
+(BEA) [national input-output table](https://www.bea.gov/industry/io_annual.htm)
+and downscale to the regional level using publicly available economic
+statistics from governmental agencies. We use additional data from the BEA on
+regional
+[gross product](https://www.bea.gov/newsreleases/regional/gdp_state/qgsp_newsrelease.htm) and
+[consumer expenditures](https://www.bea.gov/newsreleases/regional/pce/pce_newsrelease.htm) and
+data from the Census Bureau
+on
+[foreign trade](https://usatrade.census.gov),
+[bilateral trade](https://www.census.gov/econ/cfs/)
+and
+[state government expenditures](https://www.census.gov/programs-surveys/state/data/tables.All.html). For
+illustrative purposes, we show how to complement the core input output tables
+with physical energy quantities and energy prices from the Department of
+Energy's [State Energy Data System (SEDS)](https://www.eia.gov/state/seds/) of
+EIA.
 
 We call the utilities for producing our dataset blueNOTE. blueNOTE is a
 collection of [GAMS](https://www.gams.com/) (General Algebraic Modeling System)
